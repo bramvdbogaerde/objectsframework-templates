@@ -1,17 +1,26 @@
 require 'tilt'
 module ObjectsFramework
+	module TemplateEngine
+		attr_accessor :template_layout
+		attr_accessor :template_directory
+
+		def set_template_layout(layout)
+			define_method "read_template_layout" do
+				return layout
+			end
+		end
+
+		def set_template_directory(dir)
+			define_method "read_template_directory" do
+				return dir
+			end
+		end
+	end
 	# Add some methods to the ObjectsFramework Object class to enable easy rendering inside an object
 	class Object
-		def self.set_template_layout(layout)
-			@@layout = layout
-		end
-
-		def self.set_template_directory(dir)
-			@@directory = dir
-		end
-
+		extend TemplateEngine
 		def render(templatename)
-			Tilt::ERBTemplate.new(@@directory+"/"+@@layout).render(self) {Tilt::ERBTemplate.new(@@directory+"/"+templatename).render(self)}
+			Tilt::ERBTemplate.new(read_template_directory+"/"+read_template_layout).render(self) {Tilt::ERBTemplate.new(read_template_directory+"/"+templatename).render(self)}
 		end
 	end
 end
