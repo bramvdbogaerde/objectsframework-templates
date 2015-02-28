@@ -1,3 +1,4 @@
+require 'tilt'
 module ObjectsFramework
 	# Add some methods to the ObjectsFramework Object class to enable easy rendering inside an object
 	class Object
