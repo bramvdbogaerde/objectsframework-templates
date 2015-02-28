@@ -17,6 +17,7 @@ end
 
 # # Example Usage:
 # # Base path /user
+# require 'objectsframework/templates'
 # class User < ObjectsFramework::Object
 # 	set_template_layout "layout.html.erb"
 # 	set_template_directory "views"
